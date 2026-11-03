@@ -244,6 +244,14 @@ SPIRO_M = 1.0
 SPIRO_DEPTH = 0.75       # tooth half-height, in modules
 SPIRO_CLEAR = 0.15       # each side
 SPIRO_HOLE = 2.5         # pen holes, as the original's
+# The lip (owner, 2026-11-03; the generator, openscad/stencil-spirograph.scad, builds it in
+# 3D): a lip over the ring's teeth, its opening LIP_OVER inside their tips, holds the wheel
+# down; the wheel's raised ring stays RIDGE_CLEAR inside the lip's edge, and its pen holes
+# HOLE_GAP inside that.
+LIP_OVER = 1.0
+RIDGE_W = 0.8
+RIDGE_CLEAR = 0.3
+HOLE_GAP = 0.6
 
 
 def gear_outline(teeth, internal=False, m=SPIRO_M):
@@ -261,12 +269,20 @@ def spirograph(ring=64):
     return [gear_outline(ring, internal=True)]
 
 
+def ridge_r(teeth, ring=64):
+    """The wheel's raised ring's outside: RIDGE_CLEAR inside the lip's edge with the
+    wheel's pitch circle on the ring's."""
+    lip_r = ring * SPIRO_M / 2 + SPIRO_CLEAR - SPIRO_DEPTH * SPIRO_M - LIP_OVER
+    return lip_r - (ring - teeth) * SPIRO_M / 2 - RIDGE_CLEAR
+
+
 def wheel(teeth=20, holes=None):
     """The wheel that rolls in the ring: a gear with pen holes on a spiral from near its
-    centre to near its teeth, each a different curve."""
+    centre to HOLE_GAP inside its raised ring, each a different curve. (Before the lip they
+    ran out to SPIRO_HOLE inside the teeth's roots, 1.3 further.)"""
     g = gear_outline(teeth)
-    rp = teeth * SPIRO_M / 2
-    inner, outer = SPIRO_HOLE, rp - SPIRO_DEPTH * SPIRO_M - SPIRO_HOLE
+    inner = SPIRO_HOLE
+    outer = ridge_r(teeth) - RIDGE_W - HOLE_GAP - SPIRO_HOLE / 2
     n = holes or max(3, int((outer - inner) / 1.2))
     cuts = []
     for k in range(n):
