@@ -1,0 +1,7 @@
+# Other designers' files: not ours to redistribute. See stencils/sources.csv and README.md.
+stencils/sources/
+bins/1x1-block-refined.step
+
+# Generated scratch
+__pycache__/
+stencils/sheets/

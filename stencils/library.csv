@@ -1,0 +1,81 @@
+pattern,file,copies,category,preset,fit,notes
+641e9b3fb8f5,sources/makerworld-1258717/checklist-13-round.stl,1,checklist,circles-10,close,13 rows
+6c62926caa44,sources/makerworld-1258717/checklist-4-large-square.stl,1,checklist,large-squares-4,same,
+3192dea5e4d8,sources/makerworld-1258717/checklist-7-square.stl,1,checklist,squares-8,close,7 rows
+5761c3e05902,sources/makerworld-1258717/week-of.stl,1,week,week-labelled,like,"2 x 4 cells, 'WEEK OF:' heading (its O would drop out); lettering reads mirrored, flip"
+1d5dc9da2846,sources/makerworld-1409445-zhoudashi/list-planner.stl,2,checklist,circles-and-squares,close,"round left, square right; 9 rows"
+b46781fd72c1,sources/makerworld-1409445-zhoudashi/stencil-1.stl,1,lines,ruled-6,like,with a vertical divider right of centre
+1628411a4029,sources/makerworld-1409445-zhoudashi/stencil-2.stl,1,planner,quadrants,like,3 lines across a centre divider
+e9b51d324074,sources/makerworld-1409445/focus-planner.stl,1,planner,focus,same,
+49cfd7c9d441,sources/makerworld-1409445/quad-planner.stl,1,planner,quadrants,same,
+4f53cda18c2b,sources/makerworld-1409445/stencil-left-tab.step,5,blank,blank,same,tab left; the blanks' three tab positions
+a602da42d073,sources/makerworld-1736153/manuscript-stencil.stl,1,lines,manuscript,close,"groups 3, 4, 3"
+5d98e6d66845,sources/makerworld-1736153/one-column-to-do-list-stencil.stl,1,checklist,squares-10,close,"9 rows; tab on the side, turned"
+8962271b605c,sources/makerworld-1736153/straight-lines-stencil.stl,1,lines,ruled-10,close,"9 rows; tab on the side, turned"
+32f98612d614,sources/makerworld-1736153/two-column-to-do-list-stencil.stl,1,checklist,two-columns-squares,close,"tab on the side, turned"
+46242da25e2e,sources/makerworld-1736153/week-stencil.stl,1,week,week-grid,like,"cross-shaped dividers; tab on the side, turned"
+a17ceeab4652,sources/makerworld-592040/calendar.stl,1,week,week-labelled,like,"calendar cross with day letters; reads mirrored, flip"
+14d13f2d5c25,sources/makerworld-592040/checklist-round-double.stl,1,checklist,two-columns-circles,close,circles right
+c1c008a028ef,sources/makerworld-592040/checklist-round-single.stl,1,checklist,circles-8,close,circles right
+e1a54b2d75a9,sources/makerworld-592040/checklist-square-double.stl,1,checklist,two-columns-squares,close,squares right
+c13b05a84ecd,sources/makerworld-592040/checklist-square-single.stl,1,checklist,squares-8,close,squares right: flip the stencil over
+fc226b39394a,sources/makerworld-778980/graph-cover.stl,1,grid,graph,same,1.0 sheet with a grip bar
+040df107fc93,sources/makerworld-778980/task-list-cover.stl,1,checklist,with-title,close,squares right
+d01464af45c3,sources/makerworld-all-in-one-sticky-note-stencil/post-it-note-single-stencil-v2-1.stl,1,checklist,circles-and-squares,close,'TO-DO' label (its O would drop out)
+189692998ecb,sources/makerworld-dotgame/dotgame10.stl,1,grid,dots,same,
+e5be544071c0,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p1-stencil-1.stl,1,checklist,circles-and-squares,close,"100 mm memo; round left, square right"
+df7d05220802,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p1-stencil-2.stl,1,checklist,squares-8,close,squares right: flip the stencil over; 100 mm memo
+97b5ff326f1b,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p1-stencil-3.stl,1,checklist,with-title,like,100 mm memo; a date heading
+e50dd8336c59,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p2-stencil-1.stl,1,checklist,hearts,same,hearts right: flip it over; 100 mm memo
+8baec7cbb3f4,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p2-stencil-2.stl,1,checklist,two-columns-squares,same,100 mm memo
+aa28451fc564,sources/makerworld-memo-sticky-note-stencils/memo-pad-stencils-p2-stencil-3.stl,1,lines,ruled-8,same,100 mm memo
+30023d6554c5,sources/makerworld-modern-post-it-holder-with-stencils/stencil-1.stl,2,checklist,circles-8,close,"7 rows, circles right"
+8b38fb1e1573,sources/makerworld-modern-post-it-holder-with-stencils/stencil-2.stl,1,lines,ruled-8,same,
+e7ba9ea1d04b,sources/makerworld-modern-post-it-holder-with-stencils/stencil-3.stl,2,checklist,two-columns-circles,close,circles right
+4f86ea5c2727,sources/makerworld-modern-post-it-holder-with-stencils/stencil-4.stl,2,checklist,circles-and-squares,close,"circles both ends, 7 rows"
+4d7b266735a1,sources/makerworld-post-it-holder-all-stencils/stencil-2.stl,1,lines,ruled-6,close,7 rows
+610121a00f68,sources/makerworld-post-it-note-stencil-for-lists/post-it-template-large.stl,1,checklist,large-squares-4,close,"6 rows, squares right"
+846e502501c1,sources/makerworld-post-it-note-stencil-for-lists/post-it-template-small.stl,1,checklist,squares-8,close,"squares right: flip the stencil over; 9 rows, small"
+e05fdcea9027,sources/makerworld-post-it-note-stencils/arrow.stl,1,shapes,arrow,same,
+d556fa60168f,sources/makerworld-post-it-note-stencils/bullet-points.stl,1,checklist,circles-5,close,"tab on the side, turned"
+6cd03f22194c,sources/makerworld-post-it-note-stencils/circle.stl,1,shapes,circle,same,
+2560fb51678b,sources/makerworld-post-it-note-stencils/cloud.stl,1,shapes,cloud,same,
+fc7fa0a29e6b,sources/makerworld-post-it-note-stencils/elipse.stl,1,shapes,ellipse,same,
+d42b92febdaf,sources/makerworld-post-it-note-stencils/heart.stl,1,shapes,heart,same,
+ed8db95cc88f,sources/makerworld-post-it-note-stencils/lightbulb.stl,1,shapes,lightbulb,same,
+9cba88308e8b,sources/makerworld-post-it-note-stencils/square.stl,1,shapes,rounded-square,same,
+41afa21cd1d8,sources/makerworld-post-it-note-stencils/thought-bubble.stl,1,shapes,speech-bubble,same,
+cd1ce0338b1d,sources/makerworld-post-it-note-stencils/to-do.stl,1,checklist,circles-5,like,'TO DO' label (its O would drop out); tab on the side
+717be2c523cc,sources/makerworld-post-it-template/brave-trug-snaget-2.stl,4,checklist,triangles,close,"9 rows; tab on the side, turned"
+c9dc0b05575d,sources/makerworld-sticky-note-all/sticky-note-all-stencil-1.stl,4,checklist,squares-8,close,7 rows
+afde499a0e39,sources/makerworld-sticky-note-all/sticky-note-all-stencil-2.stl,4,checklist,circles-8,close,7 rows
+58861caf329d,sources/makerworld-sticky-note-all/sticky-note-all-stencil-3.stl,1,,,none,art: a city skyline and moon
+2d676c67d328,sources/makerworld-sticky-note-calendar-template/part-2.stl,1,lines,ruled-8,close,7 rows
+df1074121e14,sources/makerworld-sticky-note-calendar-template/part-3.stl,1,lines,ruled-8,same,"tab on the side, turned"
+41edc7de0cfd,sources/makerworld-sticky-note-holder-and-stencils/sticky-notes-stencil-2.stl,1,planner,pros-cons,like,lines with a dashed centre and + / - marks
+f406e8096c88,sources/makerworld-sticky-note-holder-and-stencils/sticky-notes-stencil-3.stl,1,checklist,squares-5,same,
+c7686e2d4883,sources/makerworld-sticky-note-holder-and-stencils/sticky-notes-stencil-4.stl,1,checklist,circles-5,same,
+b2d8e0df219f,sources/makerworld-sticky-note-holder-with-note-templates-stencils/postitholderstencilprosandcons.stl,1,planner,pros-cons,like,heading line at the foot
+f81e9a790c06,sources/makerworld-sticky-note-holder-with-note-templates-stencils/postitholderstencilquote.stl,1,,,none,quote marks
+3e7b2b8d72a4,sources/makerworld-sticky-note-holder-with-note-templates-stencils/postitholderstenciltodo.stl,1,checklist,circles-8,close,large circles
+611ebeeb25f9,sources/makerworld-sticky-note-post-it-holder-with-stencils/template1.stl,1,checklist,circles-and-squares,close,"round left, square right; 10 rows, small"
+7cd43f686715,sources/makerworld-sticky-note-post-it-holder-with-stencils/template2.stl,1,planner,quadrants,same,
+3c2f27d920fe,sources/makerworld-sticky-note-post-it-holder-with-stencils/template3.stl,1,week,week-labelled,like,"cross with day letters; reads mirrored, flip"
+c43e002694cc,sources/makerworld-sticky-note-station-stencil-kit/scribd-2.stl,1,lines,ruled-with-title,like,the bar at the foot
+689d64a924d1,sources/makerworld-sticky-note-station-stencil-kit/scribd-3.stl,1,lines,ruled-with-title,like,the bar at the foot; tab on the side
+4b7d1e29696f,sources/makerworld-sticky-note-station-stencil-kit/scribd1.stl,1,checklist,with-title,like,the bar at the foot
+3f25b521690c,sources/makerworld-sticky-note-stencil/spirograph.stl,1,spirograph,ring-64,close,"65 teeth, module about 0.95; its 20 tooth wheel is the file's second body (the generator's wheel-20)"
+739c8bed673d,sources/makerworld-sticky-note-stencil/sticky-note-stencil-stencil-3.stl,1,,,none,art: a city skyline and moon (as 50)
+36fb03c6f67a,sources/makerworld-stickys-stencils-4-2/stickys-stencils-4-1-stl-2.stl,1,planner,focus,same,
+1310c22c982b,sources/makerworld-stickys-stencils-4-2/stickys-stencils-4-1-stl-3.stl,1,planner,quadrants,close,the cross off centre
+e0bfa5d49050,sources/makerworld-stickys-stencils-4-2/stickys-stencils-4-1-stl-4.stl,1,checklist,squares-8,close,squares right: flip the stencil over; 9 rows
+a1b746f3591e,sources/makerworld-stickys-stencils-4-2/stickys-stencils-4-1-stl-5.stl,1,checklist,circles-8,close,small circles right
+4889bf84d02a,sources/makerworld-stickysstencils-ii-cloud-bubbles-stencil-assortment/stickys-stencils-stencils-stl-1-7.stl,2,checklist,two-columns-circles,same,
+c04e87a2b242,sources/makerworld-stickysstencils-ii-cloud-bubbles-stencil-assortment/stickys-stencils-stencils-stl-2-8.stl,2,checklist,circles-10,close,9 rows
+927f6be9e275,sources/makerworld-stickysstencils-ii-cloud-bubbles-stencil-assortment/stickys-stencils-stencils-stl-3-9.stl,2,checklist,squares-10,same,
+8787c035c557,sources/makerworld-stickysstencils-ii-cloud-bubbles-stencil-assortment/stickys-stencils-stencils-stl-4-5.stl,2,planner,pros-cons,like,heading line at the foot
+4c436a3c35cf,sources/makerworld-stickysstencils-ii-cloud-bubbles-stencil-assortment/stickys-stencils-stencils-stl-5-6.stl,2,planner,quadrants,same,
+93763e6feda6,sources/makerworld-tutu-checklist-stencil-set/checklist-round-a.stl,1,checklist,circles-8,close,7 rows
+101f1ccbc27f,sources/makerworld-tutu-checklist-stencil-set/checklist-round-b.stl,1,checklist,circles-5,same,
+3fadf2115f5b,sources/makerworld-tutu-checklist-stencil-set/checklist-square-a.stl,1,checklist,squares-8,close,7 rows
+96afb8ec9fef,sources/makerworld-tutu-checklist-stencil-set/checklist-square-b.stl,1,checklist,squares-5,same,

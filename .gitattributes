@@ -1,0 +1,22 @@
+# 3D model files are stored byte-exact: "binary" implies -text -diff, which
+# suppresses all EOL normalization (git would otherwise treat ASCII STL as text
+# and rewrite it on checkout).
+*.stl   binary
+*.STL   binary
+*.3mf   binary
+*.obj   binary
+*.step  binary
+*.stp   binary
+*.f3d   binary
+*.gcode binary
+*.bgcode binary
+
+# Sources and docs are text.
+*.scad  text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+*.svg   text eol=lf
+*.ps1   text eol=crlf
+*.png   binary
+*.txt   text eol=lf
