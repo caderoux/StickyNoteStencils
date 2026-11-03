@@ -6,9 +6,8 @@
                           shapes (stencilgen.shape: drawn there from scratch) at full size
   check                   every preset (or a settings generator's CHECKS) rendered flat by OpenSCAD and compared with the
                           Python prototype's outline (../stencilgen.py): the area that
-                          differs, as a share of the stencil's (TOLERANCE; the week's day
-                          letters LETTERS_TOLERANCE: OpenSCAD's Liberation Sans is not the
-                          prototype's DejaVu Sans); the spirograph's ring and every wheel;
+                          differs, as a share of the stencil's (TOLERANCE); the
+                          spirograph's ring and every wheel;
                           and the default rendered as a part, checked to be watertight
 
 OpenSCAD: the nightly (installed 2026-10-11 to C:/Program Files/OpenSCAD (Nightly)), with
@@ -34,7 +33,6 @@ import stencilgen  # noqa: E402
 
 OPENSCAD = r"C:\Program Files\OpenSCAD (Nightly)\openscad.com"
 TOLERANCE = 0.002        # a share of the stencil's area that may differ (facets, $fn)
-LETTERS_TOLERANCE = 0.02 # with lettering in another font
 
 
 def inline(path):
@@ -152,11 +150,9 @@ def main():
                 run(dist, out, dict(defines, flat="true"))
                 mine = svg_polygon(out)
                 diff = mine.symmetric_difference(ref).area / ref.area
-                tol = LETTERS_TOLERANCE if label == "week_labelled" else TOLERANCE
-                ok = diff <= tol
+                ok = diff <= TOLERANCE
                 bad += not ok
                 print(f"   {'ok ' if ok else 'BAD'} {label:34s} differs {diff:.4%}"
-                      f"{' (letters: other font)' if tol != TOLERANCE else ''}"
                       f"{'' if mine.geom_type == 'Polygon' else '  (not one piece!)'}")
             stl = os.path.join(tmp, "default.stl")
             run(dist, stl, {})

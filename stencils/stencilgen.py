@@ -139,21 +139,60 @@ def planner(layout="quadrants"):
             "two-rows": [h(0)]}[layout]
 
 
+# Day letters: drawn as pen strokes SLOT wide, as the lines are (owner, 2026-11-03: the
+# letters were cut from a bold font at 3.65, strokes about 0.6 wide, too narrow for a pen).
+# Each glyph is polylines on a LETTER_H tall box of its own width, centre lines of the
+# strokes; none closes a loop, so nothing drops out. LETTER_GAP of sheet between strokes
+# that are not joined, between letters, and between a letter and a slot.
+# The S's ends stop short of its middle (35 and -145 degrees): at 20 and -160 they
+# closed its counters at the widest slot (2.5), and those dropped out.
+LETTER_H = 6.0
+LETTER_GAP = 1.2
+GLYPH_W = {"M": 5.5, "T": 4.5, "W": 6.5, "H": 4.5, "F": 3.8, "S": 4.2, "U": 4.5}
+
+
+def arc(cx, cy, rx, ry, a0, a1, n=12):
+    """Points along an ellipse from angle a0 to a1 (degrees)."""
+    return [(cx + rx * math.cos(math.radians(a0 + (a1 - a0) * k / n)),
+             cy + ry * math.sin(math.radians(a0 + (a1 - a0) * k / n))) for k in range(n + 1)]
+
+
+def glyph(ch):
+    """A letter's strokes: polylines, its foot at y = 0, left at x = 0."""
+    w, h = GLYPH_W[ch], LETTER_H
+    return {
+        "M": [[(0, 0), (0, h), (w / 2, h * 0.4), (w, h), (w, 0)]],
+        "T": [[(0, h), (w, h)], [(w / 2, h), (w / 2, 0)]],
+        "W": [[(0, h), (w / 4, 0), (w / 2, h * 0.6), (3 * w / 4, 0), (w, h)]],
+        "H": [[(0, 0), (0, h)], [(w, 0), (w, h)], [(0, h / 2), (w, h / 2)]],
+        "F": [[(w, h), (0, h), (0, 0)], [(0, h / 2), (w * 0.8, h / 2)]],
+        "S": [arc(w / 2, h * 3 / 4, w / 2, h / 4, 35, 270) + arc(w / 2, h / 4, w / 2, h / 4, 90, -145)[1:]],
+        "U": [[(0, h)] + arc(w / 2, w / 2, w / 2, w / 2, 180, 360) + [(w, h)]],
+    }[ch]
+
+
+def lettering(text, x, y_top):
+    """The text's strokes as slots, its strokes' top-left at (x, y_top)."""
+    cuts = []
+    for ch in text:
+        for line in glyph(ch):
+            pts = [(x + px, y_top - LETTER_H + py) for px, py in line]
+            cuts += [slot(*a, *b) for a, b in zip(pts, pts[1:])]
+        x += GLYPH_W[ch] + SLOT + LETTER_GAP
+    return cuts
+
+
 def week(labels=True):
-    """A 7-day week: two columns of four, the last cell for notes; day letters (none with
-    a counter, so nothing drops out)."""
+    """A 7-day week: two columns of four, the last cell for notes; day letters in each
+    cell's top left, SLOT + LETTER_GAP in from its slots (the sheet's margin for the top
+    and left ones)."""
     cuts = [slot(0, -H, 0, H)] + [slot(-H, y, H, y) for y in (H / 2, 0, -H / 2)]
     if labels:
-        from matplotlib.font_manager import FontProperties
-        from matplotlib.textpath import TextPath
         days = ["M", "T", "W", "TH", "F", "S", "SU"]
         cells = [(-H, H), (0, H), (-H, H / 2), (0, H / 2), (-H, 0), (0, 0), (-H, -H / 2)]
+        inset = SLOT + LETTER_GAP
         for d, (x, y) in zip(days, cells):
-            tp = TextPath((0, 0), d, size=5, prop=FontProperties(family="DejaVu Sans",
-                                                                 weight="bold"))
-            polys = [sg.Polygon(p) for p in tp.to_polygons() if len(p) > 2]
-            g = so.unary_union(polys)
-            cuts.append(sa.translate(g, x + 2.5, y - 7.5))
+            cuts += lettering(d, x + inset, y - inset)
     return cuts
 
 

@@ -159,17 +159,49 @@ module planner_pattern(layout) {
     else if (layout == "two-rows") h(0);
 }
 
-// a 7-day week: two columns of four, the last cell for notes; day letters (none with a
-// counter, so nothing drops out)
+// day letters, drawn as pen strokes slot_width wide, as the lines are (owner, 2026-11-03:
+// cut from a bold font at 3.65 their strokes were about 0.6, too narrow for a pen). Each
+// glyph is polylines, the strokes' centre lines, on a LETTER_H box of its own width; none
+// closes a loop, so nothing drops out. LETTER_GAP of sheet between strokes not joined,
+// between letters, and between a letter and a slot.
+// The S's ends stop short of its middle (35 and -145 degrees): at 20 and -160 they
+// closed its counters at the widest slot (2.5), and those dropped out.
+LETTER_H = 6;
+LETTER_GAP = 1.2;
+function glyph_w(ch) = ch == "M" ? 5.5 : ch == "W" ? 6.5 : ch == "F" ? 3.8 : ch == "S" ? 4.2 : 4.5;
+function arc(cx, cy, rx, ry, a0, a1, n = 12) =
+    [for (k = [0 : n]) let(a = a0 + (a1 - a0) * k / n) [cx + rx * cos(a), cy + ry * sin(a)]];
+function glyph(ch) = let(w = glyph_w(ch), h = LETTER_H)
+    ch == "M" ? [[[0, 0], [0, h], [w / 2, h * 0.4], [w, h], [w, 0]]]
+  : ch == "T" ? [[[0, h], [w, h]], [[w / 2, h], [w / 2, 0]]]
+  : ch == "W" ? [[[0, h], [w / 4, 0], [w / 2, h * 0.6], [3 * w / 4, 0], [w, h]]]
+  : ch == "H" ? [[[0, 0], [0, h]], [[w, 0], [w, h]], [[0, h / 2], [w, h / 2]]]
+  : ch == "F" ? [[[w, h], [0, h], [0, 0]], [[0, h / 2], [w * 0.8, h / 2]]]
+  : ch == "S" ? [concat(arc(w / 2, h * 3 / 4, w / 2, h / 4, 35, 270),
+                        [for (q = [1 : 12]) arc(w / 2, h / 4, w / 2, h / 4, 90, -145)[q]])]
+  :             [concat([[0, h]], arc(w / 2, w / 2, w / 2, w / 2, 180, 360), [[w, h]])];   // U
+
+// the text's strokes, their top left at (x, y_top)
+module lettering(text, x, y_top, i = 0) {
+    if (i < len(text)) {
+        for (line = glyph(text[i]), k = [0 : len(line) - 2])
+            slot([x + line[k][0], y_top - LETTER_H + line[k][1]],
+                 [x + line[k + 1][0], y_top - LETTER_H + line[k + 1][1]], slot_width);
+        lettering(text, x + glyph_w(text[i]) + slot_width + LETTER_GAP, y_top, i + 1);
+    }
+}
+
+// a 7-day week: two columns of four, the last cell for notes; day letters in each cell's
+// top left, slot_width + LETTER_GAP in from its slots (the sheet's margin for the top and
+// left ones)
 module week_pattern(labels) {
     v(0);
     for (y = [H / 2, 0, -H / 2]) h(y);
     if (labels) {
         days = ["M", "T", "W", "TH", "F", "S", "SU"];
         cells = [[-H, H], [0, H], [-H, H / 2], [0, H / 2], [-H, 0], [0, 0], [-H, -H / 2]];
-        for (i = [0 : 6])
-            translate([cells[i][0] + 2.5, cells[i][1] - 7.5])
-                text(days[i], size = 3.65, font = "Liberation Sans:style=Bold");
+        inset = slot_width + LETTER_GAP;
+        for (i = [0 : 6]) lettering(days[i], cells[i][0] + inset, cells[i][1] - inset);
     }
 }
 
