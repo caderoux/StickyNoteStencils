@@ -46,8 +46,11 @@ Each has the stacking lip and Gridfinity Refined feet, with side-loading slots f
 mm magnets. The STLs are in print orientation and need no supports.
 
 To rebuild them you need `1x1-block-refined.step` in `bins/`, from
-[Gridfinity Refined Base STP/STEP files](https://www.printables.com/model/971527-gridfinity-refined-base-stpstep-files).
-It is someone else's file, so it is not included here.
+[Gridfinity Refined Base STP/STEP files](https://www.printables.com/model/971527-gridfinity-refined-base-stpstep-files)
+by Kytor, a remake of grizzie17's
+[Gridfinity Refined](https://www.printables.com/model/413761-gridfinity-refined). That file
+is not included here, but the bins' feet are cut from it, so the bins share its CC BY-SA 4.0
+licence.
 
 ## Where the patterns came from
 
@@ -63,6 +66,12 @@ catalog yourself, download them into `stencils/sources/<folder>/`.
 
 ## Licence
 
-The code (`.py`, `.scad`) is under the MIT License. The models and images (STL, STEP,
-3MF, PNG, SVG) are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
-`LICENSE`.
+- **Code** (`.py`, `.scad`): MIT.
+- **Gridfinity bins** (the STL, STEP and 3MF files in `bins/`):
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), adapted from Kytor's
+  Gridfinity Refined base. If you share them or a remix of them, credit both and keep that
+  licence.
+- **Everything else made here** (the stencils and images):
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+`LICENSE` has the details and the credits.

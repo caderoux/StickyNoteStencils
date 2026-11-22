@@ -1,8 +1,21 @@
-StickyNoteStencils is licensed in two parts.
+StickyNoteStencils is licensed in three parts.
 
 Code -- the generator and build sources (*.py, *.scad) -- under the MIT License below.
 
-Models and images -- the STL, STEP and 3MF files, thumbnails and gallery -- under the
+Gridfinity bins -- every STL, STEP and 3MF file in bins/ -- under the Creative Commons
+Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0), in LICENSE-bins.txt.
+Copyright (c) 2026 Cade Roux. They are adapted from, and contain part of:
+
+  "Gridfinity Refined Base STP/STEP Files" by Kytor, CC BY-SA 4.0
+  https://www.printables.com/model/971527-gridfinity-refined-base-stpstep-files
+  https://creativecommons.org/licenses/by-sa/4.0/
+
+  Changes: the foot was cut from Kytor's 1 x 1 block, repeated under each cell and
+  joined to new bin bodies. Kytor's model is a remake of "Gridfinity Refined" by
+  grizzie17, https://www.printables.com/model/413761-gridfinity-refined
+  Neither designer endorses these bins.
+
+All other models and images -- the stencils, thumbnails and gallery -- under the
 Creative Commons Attribution 4.0 International licence (CC BY 4.0), in LICENSE-models.txt.
 
 -------------------------------------------------------------------------------
