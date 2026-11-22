@@ -9,6 +9,12 @@
                        each stencil's whole top edge stands clear above the rim, wherever
                        its tab is)
   pen-holder-1x2       four marker holes and six pen holes (owner: a mix)
+  spirograph-holder-1x2  the spirograph's ring and its four wheels on one side, seven
+                       stencils beside them (owner, 2026-11-03: the ring with its lip is
+                       2.6 thick, too thick for the stencil holder's slots; a 2 x 1 of its
+                       own, the wheels in slots sized for each. 2026-11-05: the spirograph
+                       on one side, standard stencil slots filling the other). Built as the
+                       stencil holder, in the set's place for it or beside
 
 2 x 2 + 1 x 2 + 1 x 2 fills the 2 x 4 space; the 1 x 2 bins go either way round. Each is
 a standard Gridfinity bin (a foot per cell, 0.5 under the grid) with the stacking lip
@@ -107,6 +113,18 @@ LEAD = 1.0               # the ribs' tops chamfered this much, to guide a stenci
 RIB_DEPTH = 6.0          # how far a stencil's end sits in its slot (owner's first print: the
                          # ribs ended at the stencils' ends, 0.3 clear, so the stencils stood
                          # free of them and fell over; [own] holders hold them full length)
+
+# --- Spirograph holder --------------------------------------------------------------------
+# [spiro] = ../stencils/openscad/stencil-spirograph.scad: the ring 2.6 thick (lip and all),
+# the wheels 2.6 at their raised rings; tips SPIRO_M * teeth + 2 * (0.75 - 0.15) across.
+SPIRO_T = 2.6            # [spiro]
+SPIRO_SLOT = SPIRO_T + 0.4   # as the stencil slots, SLOT_W for 1.6
+WHEEL_TIPS = {t: t + 1.2 for t in (20, 24, 30, 36)}   # [spiro] tip diameters
+WHEEL_CLEAR = 0.5        # a wheel's cradle, round it (END_CLEAR)
+WHEEL_SHOW = 1 / 3       # of a wheel's diameter, above the lip's top: to take hold of
+SPIRO_RIB = 1.2          # each side of a slot: three perimeters
+SPIRO_STENCILS = 7       # standard stencil slots beside them: as many as fit, ribs >= SPIRO_RIB
+WHEEL_GAP = 2.0          # between two cradles in a row
 
 # --- Pen holder ----------------------------------------------------------------------------
 # All within the lip's opening (36.3 across): two pens side by side fit, three do not.
@@ -265,6 +283,14 @@ def postit_tray() -> cq.Workplane:
     return round_top(body, top + LIP_TOP, on_outline(w, l))
 
 
+def end_block(x0: float, x1: float, y_in: float, sgn: int, il: float, top: float) -> cq.Workplane:
+    """From the end wall (sgn) in to y_in, x0 to x1, floor to top, its top chamfered LEAD."""
+    y_wall = sgn * il / 2
+    prof = [(y_wall + sgn * 0.01, FLOOR_Z - 0.01), (sgn * y_in, FLOOR_Z - 0.01),
+            (sgn * y_in, top - LEAD), (sgn * (y_in + LEAD), top), (y_wall + sgn * 0.01, top)]
+    return cq.Workplane("YZ", origin=(x0, 0, 0)).polyline(prof).close().extrude(x1 - x0)
+
+
 def stencil_holder() -> cq.Workplane:
     """1 x 2, TALL_UNITS: a pocket the length of the bin; on each end wall a backing out to
     the slots' bottoms, END_CLEAR past a stencil's end, and from it a comb of ribs, full
@@ -288,21 +314,14 @@ def stencil_holder() -> cq.Workplane:
     span = w - 2 * LIP[0][1]                       # the lip's opening, across
     pitch = span / STENCILS
     xs = [-span / 2 + pitch * (k + 0.5) for k in range(STENCILS)]   # the slots' centres
-    def block(x0, x1, y_in, sgn):
-        """From the end wall (sgn) in to y_in, x0 to x1, floor to top, its top chamfered."""
-        y_wall = sgn * il / 2
-        prof = [(y_wall + sgn * 0.01, FLOOR_Z - 0.01), (sgn * y_in, FLOOR_Z - 0.01),
-                (sgn * y_in, top - LEAD), (sgn * (y_in + LEAD), top), (y_wall + sgn * 0.01, top)]
-        return cq.Workplane("YZ", origin=(x0, 0, 0)).polyline(prof).close().extrude(x1 - x0)
-
     ribs = None
     for sgn in (-1, 1):
-        backing = block(-iw / 2, iw / 2, y_bottom, sgn)
+        backing = end_block(-iw / 2, iw / 2, y_bottom, sgn, il, top)
         ribs = backing if ribs is None else ribs.union(backing)
         for k in range(STENCILS + 1):              # between and outside the slots
             x0 = -iw / 2 if k == 0 else xs[k - 1] + SLOT_W / 2
             x1 = iw / 2 if k == STENCILS else xs[k] - SLOT_W / 2
-            ribs = ribs.union(block(x0, x1, y_tip, sgn))
+            ribs = ribs.union(end_block(x0, x1, y_tip, sgn, il, top))
     return round_top(body.union(ribs), top + LIP_TOP, on_outline(w, l))
 
 
@@ -328,8 +347,71 @@ def pen_holder() -> cq.Workplane:
     return round_top(body, top + LIP_TOP, on_outline(w, l))
 
 
+def spirograph_holder() -> cq.Workplane:
+    """1 x 2, TALL_UNITS: the stencil holder's pocket, its slots across the lip's opening.
+    On one side (owner, 2026-11-05: the spirograph on one side, standard stencil slots
+    filling the other) a block along the bin, end wall to end wall, floor to the body's
+    top, with three SPIRO_SLOT slots and SPIRO_RIB between and after them: two rows of
+    wheels (the two larger, then the two smaller), then the ring standing on the floor, as
+    the stencils stand. Each wheel sits in a cradle: a round-bottomed slot WHEEL_CLEAR round
+    it, deep enough that WHEEL_SHOW of the wheel stands above the lip's top. Across the
+    rest, the stencil holder's backings and end ribs, SPIRO_STENCILS slots SLOT_W wide,
+    the ribs between them dividing what is left. The slots' sides are vertical and their
+    bottoms face up: nothing overhangs. All within the lip's opening, so everything lifts
+    out past it."""
+    top = TALL_UNITS * U
+    w, l = GF - GAP, 2 * GF - GAP
+    body = bin_body(1, 2, TALL_UNITS)
+    iw, il = w - 2 * WALL, l - 2 * WALL
+    ir = CORNER_R - WALL
+    shelf = lip_shelf(iw, il, ir, w, l, top)
+    z_shelf = shelf.val().BoundingBox().zmin
+    hole = (cq.Workplane("XY", origin=(0, 0, FLOOR_Z)).sketch().rect(iw, il)
+            .vertices().fillet(ir).finalize().extrude(z_shelf - FLOOR_Z))   # meets the shelf exactly
+    body = body.cut(hole).cut(shelf)
+    span = w - 2 * LIP[0][1]                       # the lip's opening, across
+    open_l = l - 2 * LIP[0][1]                     # and along
+    rows = [(36, 30), (24, 20), None]              # None: the ring
+    spiro_w = len(rows) * (SPIRO_SLOT + SPIRO_RIB)
+    rib = (span - spiro_w - SPIRO_STENCILS * SLOT_W) / (SPIRO_STENCILS - 1)
+    assert rib >= SPIRO_RIB, "stencil slots: too many for the opening"
+    x_block = -span / 2 + spiro_w                  # the block's face: the first stencil slot's side
+    block = cq.Solid.makeBox(x_block + iw / 2 + 0.01, il + 0.02, top - FLOOR_Z + 0.01,
+                             cq.Vector(-iw / 2 - 0.01, -il / 2 - 0.01, FLOOR_Z - 0.01))
+    for k, wheels in enumerate(rows):
+        x0 = -span / 2 + k * (SPIRO_SLOT + SPIRO_RIB)   # the slot's side
+        if wheels is None:                         # the ring, on the floor
+            block = block.cut(cq.Solid.makeBox(SPIRO_SLOT, STENCIL + 2 * END_CLEAR,
+                                               top - FLOOR_Z + 1,
+                                               cq.Vector(x0, -STENCIL / 2 - END_CLEAR, FLOOR_Z)))
+            continue
+        radii = [WHEEL_TIPS[t] / 2 + WHEEL_CLEAR for t in wheels]
+        assert sum(2 * r for r in radii) + WHEEL_GAP <= open_l, "wheels: longer than the opening"
+        y = -(sum(2 * r for r in radii) + WHEEL_GAP) / 2
+        for t, r in zip(wheels, radii):
+            yc = y + r
+            y += 2 * r + WHEEL_GAP
+            d = WHEEL_TIPS[t]
+            zc = top + LIP_TOP + WHEEL_SHOW * d - d / 2     # the wheel's centre
+            cradle = cq.Solid.makeCylinder(r, SPIRO_SLOT, cq.Vector(x0, yc, zc), cq.Vector(1, 0, 0))
+            if zc < top:                           # straight sides up from its middle
+                cradle = cradle.fuse(cq.Solid.makeBox(SPIRO_SLOT, 2 * r, top + 1 - zc,
+                                                      cq.Vector(x0, yc - r, zc)))
+            block = block.cut(cradle)
+    ribs = cq.Workplane("XY").add(block)
+    y_bottom = STENCIL / 2 + END_CLEAR             # the slots' bottoms, as the stencil holder's
+    y_tip = y_bottom - RIB_DEPTH
+    xs = [x_block + k * (SLOT_W + rib) for k in range(SPIRO_STENCILS)]   # the slots' sides
+    for sgn in (-1, 1):
+        ribs = ribs.union(end_block(x_block - 0.01, iw / 2, y_bottom, sgn, il, top))
+        for k in range(SPIRO_STENCILS):            # after each slot
+            x0 = xs[k] + SLOT_W
+            x1 = iw / 2 if k == SPIRO_STENCILS - 1 else xs[k + 1]
+            ribs = ribs.union(end_block(x0, x1, y_tip, sgn, il, top))
+    return round_top(body.union(ribs), top + LIP_TOP, on_outline(w, l))
+
 PARTS = {"postit-tray-2x2": postit_tray, "stencil-holder-1x2": stencil_holder,
-         "pen-holder-1x2": pen_holder}
+         "pen-holder-1x2": pen_holder, "spirograph-holder-1x2": spirograph_holder}
 
 if __name__ == "__main__":
     import sys
