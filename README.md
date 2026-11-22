@@ -32,12 +32,15 @@ Build with the OpenSCAD nightly (the Manifold backend). The 2021.01 release is t
 
 ## Gridfinity bins
 
-`bins/postit-stencil-pen-2x4.py` (CadQuery) makes three bins for a 2 x 4 Gridfinity space:
+`bins/postit-stencil-pen-2x4.py` (CadQuery) makes four bins. The first three fill a 2 x 4
+Gridfinity space; the fourth takes the stencil holder's place in it, or stands beside the set:
 
 - **postit-tray-2x2**: holds the pad, open at the front so a stencil lying on it can hang
   its tab out over the edge.
 - **stencil-holder-1x2**: ten stencils standing on edge in slots, lifted out by their tabs.
 - **pen-holder-1x2**: four marker holes and six pen holes.
+- **spirograph-holder-1x2**: the spirograph's ring and four wheels on one side, seven
+  stencils in slots on the other. Not yet test-printed.
 
 Each has the stacking lip and Gridfinity Refined feet, with side-loading slots for 6 x 2
 mm magnets. The STLs are in print orientation and need no supports.
